@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*$py.class
+
+
+# virtualenv
+ENV/
+*.db
+*.pyc
+*.DS_Store
+.coverage
+cover/
+bucketlist.db
+trial.py
+migrations/
+rfl.txt
+bucketlist.sublime-workspace
