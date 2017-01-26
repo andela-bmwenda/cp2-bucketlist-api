@@ -4,6 +4,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
+    SECRET_KEY = "123bucketlistapp"
     SQLALCHEMY_DATABASE_URI = 'sqlite:///bucketlist.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
@@ -18,7 +19,8 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite://:memory:'
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
 
 
 config_environments = {
