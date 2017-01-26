@@ -1,2 +1,3 @@
+[![Build Status](https://travis-ci.org/andela-bmwenda/cp2-bucketlist-api.svg?branch=master)](https://travis-ci.org/andela-bmwenda/cp2-bucketlist-api)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f556e41f24c744e0a2a0cff938f59e5b)](https://www.codacy.com/app/boniface-mwenda/cp2-bucketlist-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andela-bmwenda/cp2-bucketlist-api&amp;utm_campaign=Badge_Grade)[![Coverage Status](https://coveralls.io/repos/github/andela-bmwenda/cp2-bucketlist-api/badge.svg?branch=develop)](https://coveralls.io/github/andela-bmwenda/cp2-bucketlist-api?branch=develop)
 # cp2-bucketlist-api
 A restful flask API for creating bucketlists
