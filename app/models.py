@@ -30,7 +30,6 @@ class User(db.Model, UserMixin):
 
 class BucketList(db.Model):
     __tablename__ = 'bucketlists'
-    # __searchable__ = ['name']
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     user = db.relationship('User',
