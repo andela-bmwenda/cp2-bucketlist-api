@@ -40,7 +40,7 @@ class BucketListItems(Resource):
         try:
             name = data["name"]
         except Exception:
-            return {"error": "Item has no data"}, 400
+            return {"error": "Item is missing 'name' parameter"}, 400
         exists = db.session.query(BucketListItem).filter_by(
             name=name).scalar() is not None
         if not exists:
