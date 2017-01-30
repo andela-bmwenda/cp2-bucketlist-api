@@ -17,7 +17,7 @@ class BucketListApiTestCase(BaseTestCase):
 
         response = self.post({})
         self.assertEqual(response.json,
-                         {"error": "Bucketlist has no data"})
+                         {"error": "Bucketlist is missing 'name' parameter"})
 
     def test_create_new_bucket_list(self):
         response = self.post({"name": "New bucketlist"})
