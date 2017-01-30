@@ -16,7 +16,7 @@ class BucketListItemsTestCase(BaseTestCase):
     def test_create_empty_buckelist_item(self):
         response = self.post({})
         self.assertEqual(response.json,
-                         {"error": "Item has no data"})
+                         {"error": "Item is missing 'name' parameter"})
 
     def test_create_duplicate_item(self):
         response = self.post({"name": "Test item"})
