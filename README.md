@@ -80,6 +80,13 @@ Example
 
 This returns 30 bucketlists records for the logged in user.
 
+To navigate through pages, use the `page` parameter to pass the page number you use to view.
+Example:
+
+`GET http://localhost:/bucketlists?page=3`
+
+This returns the bucketlists on page three, if there are any that exist.
+
 ### Searching
 
 It is possible to search bucketlists using the parameter `q` in the GET request. 
