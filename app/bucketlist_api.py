@@ -24,6 +24,7 @@ class BucketLists(Resource):
 
         user = authenticate_token(request)
         limit = int(request.args.get("limit", 20))
+        page = int(request.args.get("page", 1))
         if int(limit) > 100:
             limit = 100
         search = request.args.get('q', None)
@@ -36,7 +37,9 @@ class BucketLists(Resource):
         else:
             bucketlists_query = BucketList.query.filter_by(user_id=user.id)
         # Paginate bucketlist results
-        bucketlists = bucketlists_query.paginate(1, limit)
+        bucketlists = bucketlists_query.paginate(page=page,
+                                                 per_page=limit,
+                                                 error_out=False)
         bucket_list = []
         for lst in bucketlists.items:
             items = lst.items.all()
@@ -61,7 +64,7 @@ class BucketLists(Resource):
         try:
             name = data["name"]
         except Exception:
-            return {"error": "Bucketlist has no data"}, 400
+            return {"error": "Bucketlist is missing 'name' parameter"}, 400
         exists = db.session.query(BucketList).filter_by(
             name=name).scalar() is not None
         if not exists:
@@ -90,7 +93,6 @@ class BucketListSingle(Resource):
         Returns the bucketlist as json
         """
         user = authenticate_token(request)
-        # bucketlist = self.get_bucketlist(bucketlist_id)
         bucketlist = BucketList.query.filter_by(
             id=bucketlist_id, user_id=user.id).first()
         if bucketlist:
