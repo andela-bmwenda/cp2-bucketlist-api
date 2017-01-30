@@ -32,7 +32,7 @@ class BaseTestCase(TestCase):
             payload, Config.SECRET_KEY, algorithm='HS256')
         self.token = encoded_token.decode('utf-8')
 
-        # Add a buckelist to test db
+        # Add a bucketlist to test db
         user = User.query.filter_by(username="Tester").first()
         bucketlist = BucketList("Test bucketlist", user.id, user.username)
         db.session.add(bucketlist)
