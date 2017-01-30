@@ -11,7 +11,7 @@ ENV/
 .coverage
 cover/
 bucketlist.db
-trial.py
+trials.py
 migrations/
 rfl.txt
 bucketlist.sublime-workspace
