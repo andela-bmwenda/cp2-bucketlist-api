@@ -18,10 +18,11 @@ def get_bucketlist(bucketlist_id):
             return None
 
 
-def get_bucketlist_item(item_id):
+def get_bucketlist_item(bucketlist_id, item_id):
         """Gets buckelist item with
         the id <item_id>"""
-        item = BucketListItem.query.get(item_id)
+        item = BucketListItem.query.filter_by(bucketlist_id=bucketlist_id,
+                                              id=item_id).first()
         if item:
             return item
         else:
@@ -76,7 +77,7 @@ class BucketListItemSingle(Resource):
         """Gets a item with the id <item_id>
         for buckelist with the id <bucketlist_id>"""
         authenticate_token(request)
-        item = get_bucketlist_item(item_id)
+        item = get_bucketlist_item(bucketlist_id, item_id)
         if item:
             item_json = schema.dump(item)
             return jsonify(item_json.data)
@@ -86,7 +87,7 @@ class BucketListItemSingle(Resource):
     def put(self, bucketlist_id, item_id):
         """Edits buckelist item"""
         authenticate_token(request)
-        item = get_bucketlist_item(item_id)
+        item = get_bucketlist_item(bucketlist_id, item_id)
         if item:
             data = request.get_json(silent=True)
             try:
@@ -106,7 +107,7 @@ class BucketListItemSingle(Resource):
     def delete(self, bucketlist_id, item_id):
         """Deletes bucketlist item"""
         authenticate_token(request)
-        item = get_bucketlist_item(bucketlist_id)
+        item = get_bucketlist_item(bucketlist_id, item_id)
         if item:
             db.session.delete(item)
             db.session.commit()
