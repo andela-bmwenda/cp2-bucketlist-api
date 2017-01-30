@@ -7,6 +7,7 @@ from app.auth import authenticate_token
 from app.models import (db, BucketList, BucketlistItemSchema,
                         BucketlistSchema)
 
+
 schema = BucketlistItemSchema()
 bucketlist_schema = BucketlistSchema()
 
@@ -20,17 +21,22 @@ class BucketLists(Resource):
         """
         Gets all bucketlists
         """
+
         user = authenticate_token(request)
-        limit = request.args.get("limit")
-        # Paginate items using limit
-        if not limit or int(limit) < 0:
-            limit = 20
-        elif int(limit) > 100:
+        limit = int(request.args.get("limit", 20))
+        if int(limit) > 100:
             limit = 100
+        search = request.args.get('q', None)
+        if search:
+            bucketlists_query = BucketList.query.filter(
+                BucketList.name.ilike('%' + search + '%')).filter_by(user_id=user.id)
+            if not bucketlists_query.count():
+                return {"message":
+                        "No bucketlists found matching '{}'".format(search)}
         else:
-            limit = int(limit)
-        bucketlists = BucketList.query.filter_by(
-            user_id=user.id).paginate(1, limit, 30)
+            bucketlists_query = BucketList.query.filter_by(user_id=user.id)
+        # Paginate bucketlist results
+        bucketlists = bucketlists_query.paginate(1, limit)
         bucket_list = []
         for lst in bucketlists.items:
             items = lst.items.all()
